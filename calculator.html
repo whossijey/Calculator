@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            height: 750px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: hsl(0, 0%, 95%);
+        }
+
+        #calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 315px;
+            border-radius: 10px;
+            background-color: hsl(0, 0%, 15%);
+            max-width: 500px;
+        }
+
+        #display {
+            grid-column: span 4;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            width: 305px;
+            height: 85px;
+            text-align: right;
+            padding: 5px;
+            overflow: hidden;
+            border: none;
+            background-color: hsl(0, 0%, 20%);
+            font-size: 40px;
+            color: white;
+        }
+
+        #keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 13px;
+        }
+
+        button {
+            border: none; 
+            border-radius: 9px;
+            background-color: hsl(0, 0%, 30%);
+            color: white;
+            cursor: pointer;
+            font-size: 28px;
+            height: 75px;
+            width: 65px;
+        }
+
+        button:hover {
+            background-color: hsl(0, 0%, 40%);
+
+        }
+
+        button:active {
+            background-color: hsl(0, 0%, 50%);
+        }
+
+        .operator-btn {
+            background-color: hsl(35, 100%, 55%);
+        }
+
+        .operator-btn:hover {
+            background-color: hsl(35, 100%, 75%)
+        }
+
+        .operator-btn:active {
+            background-color: hsl(35, 100%, 75%)
+        }
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+
+    <div id="calculator">
+        <input id="display" readonly>
+        <div id="keys">
+        <button onclick="appendTodisplay('7')">7</button>
+        <button onclick="appendTodisplay('8')">8</button>
+        <button onclick="appendTodisplay('9')">9</button>
+        <button onclick="appendTodisplay('+')" class="operator-btn">+</button>
+        <button onclick="appendTodisplay('4')">4</button>
+        <button onclick="appendTodisplay('5')">5</button>
+        <button onclick="appendTodisplay('6')">6</button>
+        <button onclick="appendTodisplay('-')" class="operator-btn">-</button>
+        <button onclick="appendTodisplay('1')">1</button>
+        <button onclick="appendTodisplay('2')">2</button>
+        <button onclick="appendTodisplay('3')">3</button>
+        <button onclick="appendTodisplay('*')" class="operator-btn">*</button>
+        <button onclick="appendTodisplay('0')">0</button>
+        <button onclick="appendTodisplay('00')">00</button>
+        <button onclick="appendTodisplay('.')">.</button>
+        <button onclick="appendTodisplay('/')" class="operator-btn">/</button>
+        <button onclick="cleardisplay()">AC</button>
+        <button onclick="del()">DEL</button>
+        <button onclick="percentage('%')">%</button>
+        <button onclick="calculate()">=</button>
+        </div>
+        </div>
+
+    <script>
+        const display = document.getElementById("display");
+
+        function appendTodisplay(input) {
+            display.value += input;
+        }
+
+        function cleardisplay() {
+            display.value =" ";
+        }
+
+        function del() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function percentage() {
+            try {
+                display.value = (parseFloat(display.value) / 100).toString();
+            } catch (error) {
+                display.value = "Error";
+            }
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } 
+            catch (error) {
+                display.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
